@@ -51,3 +51,11 @@ def create_account():
         db.close()
     else:
         return 'please make sure that your confirmed password matches the one you put first!'
+
+@app.route('/survey', methods=["POST"])
+def parse_input_and_insert_it():
+    title = request.form.get('title')
+    question_one = request.form.get('question_one')
+    question_two = request.form.get('question_two')
+    question_three = request.form.get('question_three')
+    question_four = request.form.get('question_four')
