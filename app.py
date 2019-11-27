@@ -20,10 +20,7 @@ def verify_login():
         db = sqlite3.connect('accounts.sqlite')
         query = db.execute(
             f'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
-        if dbaccount in query:
-            return render_template('survey.html')
-        else:
-            return render_template('index.html')
+        return query
 
 
 '''
