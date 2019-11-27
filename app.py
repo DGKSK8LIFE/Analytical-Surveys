@@ -13,23 +13,22 @@ def index():
 def verify_login():
     username = request.form.get('username')
     password = request.form.get('password')
-    db_account = request.form.get(f'{username}|{password}')
     if not username or not password:
         return render_template('failpage.html')
     else:
         db = sqlite3.connect('accounts.sqlite')
         query = db.execute(
             f'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
-        return query
+        if username and password in list(query.fetchall()):
+            return render_template('survey.html')
+        else:
+            print(query.fetchall())
+            return render_template('index.html')
 
 
-'''
-@app.route('/survey', methods=['POST'])
-def create_survey():
-'''
+# @app.route('/survey', methods=['POST'])
+# def create_survey():
 
-'''
-@app.route('/createaccount.html')
-def create_page():
-    return render_template('createaccount.html')
-'''
+# @app.route('/createaccount.html')
+# def create_page():
+#     return render_template('createaccount.html')
