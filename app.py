@@ -35,7 +35,7 @@ def create_page():
     return render_template('createaccount.html')
 
 
-@app.route('/submitcreatepage')
+@app.route('/submitcreatepage', methods=["POST"])
 def create_account():
     username = request.form.get('username')
     password = request.form.get('password')
@@ -48,3 +48,4 @@ def create_account():
             f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
         db.commit()
         return render_template('index.html')
+        db.close()
