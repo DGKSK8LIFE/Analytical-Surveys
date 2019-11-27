@@ -27,9 +27,24 @@ def verify_login():
         db.close()
 
 
-# @app.route('/survey', methods=['POST'])
 # def create_survey():
+#   @app.route('/survey', methods=['POST'])
 
 @app.route('/createaccount')
 def create_page():
     return render_template('createaccount.html')
+
+
+@app.route('/submitcreatepage')
+def create_account():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    confirm_pass = request.form.get('confirmpass')
+    if not username or not password or not confirm_pass:
+        return "please fill out all forms"
+    elif username and password and confirm_pass and password == confirm_pass:
+        db = sqlite3.connect('accounts.sqlite')
+        db.execute(
+            f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
+        db.commit()
+        return render_template('index.html')
