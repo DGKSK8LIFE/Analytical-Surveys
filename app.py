@@ -27,6 +27,11 @@ def verify_login():
 
 
 '''
+@app.route('/survey', methods=['POST'])
+def create_survey():
+'''
+
+'''
 @app.route('/createaccount.html')
 def create_page():
     return render_template('createaccount.html')
