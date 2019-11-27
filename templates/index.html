@@ -8,19 +8,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
     <title>Analytical Template App</title>
 </head>
-
+<!-- <script>
+    function showPass() {
+        var pass = document.getElementById('pass');
+        if (document.getElementById('check').checked) {
+            pass.setAttribute('type', 'text');
+        } else {
+            pass.setAttribute('type', 'password');
+        }
+    }
+</script> -->
 
 <body>
     <a href="createaccount.html">Create Account</a>
     <div class="wrapper">
-        <form action="" method="POST">
+        <form action='/loggedin' method="POST">
             <input name="username" type="text" placeholder="username">
             <br>
             <br>
-            <input name="username" type="text" placeholder="password">
+            <input name="password" type="text" id="pass" placeholder="password">
             <br>
             <br>
-            <input name="username" type="submit" value="Login">
+            <!-- <input type="checkbox" id="check" onclick="showPass();">Show Passwords -->
+            <!-- <br>
+            <br> -->
+            <input type="submit" value="Login">
         </form>
     </div>
 
