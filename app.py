@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -10,11 +10,13 @@ def index():
 
 @app.route('/loggedin', methods=["POST"])
 def verify_login():
-    username = request.form.get("username")
-    password = request.form.get("password")
-    return username, password
+    username = request.form.get('username')
+    password = request.form.get('password')
+    return 'lmao'
 
 
+'''
 @app.route('/createaccount.html')
 def create_page():
     return render_template('createaccount.html')
+'''
