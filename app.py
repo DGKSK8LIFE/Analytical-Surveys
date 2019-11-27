@@ -22,9 +22,9 @@ def verify_login():
         account = query.fetchall()
         if account:
             return render_template('survey.html')
-            db.close()
+            # db.close()
         return render_template('index.html')
-        db.close()
+        # db.close()
 
 
 # def create_survey():
@@ -48,7 +48,7 @@ def create_account():
             f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
         db.commit()
         return render_template('index.html')
-        db.close()
+        # db.close()
     else:
         return 'please make sure that your confirmed password matches the one you put first!'
 
