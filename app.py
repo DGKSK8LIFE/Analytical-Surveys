@@ -13,6 +13,7 @@ def index():
 def verify_login():
     username = request.form.get('username')
     password = request.form.get('password')
+    dbaccount = f'{username}|{password}'
     if not username or not password:
         return render_template('failpage.html')
     return render_template('survey.html')
@@ -21,7 +22,7 @@ def verify_login():
     #     except:
     #         print('database error')
     #     query = db.execute('SELECT * FROM ACCOUNT;')
-    #     if username in query and password in query:
+    #     if dbaccount:
     #         return render_template('survey.html')
     # else:
 
