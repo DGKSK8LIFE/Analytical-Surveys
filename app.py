@@ -9,7 +9,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/loggedin', methods=["GET, POST"])
+@app.route('/loggedin')
 def verify_login():
     username = request.form.get('username')
     password = request.form.get('password')
