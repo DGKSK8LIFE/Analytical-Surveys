@@ -18,17 +18,18 @@ def verify_login():
     else:
         db = sqlite3.connect('accounts.sqlite')
         query = db.execute(
-            f'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
-        if username and password in list(query.fetchall()):
+            f'SELECT * FROM ACCOUNT WHERE username=\'{username}\' AND password=\'{password}\';')
+        account = query.fetchall()
+        if account:
             return render_template('survey.html')
-        else:
-            print(query.fetchall())
-            return render_template('index.html')
+            db.close()
+        return render_template('index.html')
+        db.close()
 
 
 # @app.route('/survey', methods=['POST'])
 # def create_survey():
 
-# @app.route('/createaccount.html')
-# def create_page():
-#     return render_template('createaccount.html')
+@app.route('/createaccount')
+def create_page():
+    return render_template('createaccount.html')
