@@ -13,18 +13,17 @@ def index():
 def verify_login():
     username = request.form.get('username')
     password = request.form.get('password')
-    dbaccount = f'{username}|{password}'
+    db_account = request.form.get(f'{username}|{password}')
     if not username or not password:
         return render_template('failpage.html')
-    return render_template('survey.html')
-    #     try:
-    #         db = sqlite3.connect('accounts.sqlite')
-    #     except:
-    #         print('database error')
-    #     query = db.execute('SELECT * FROM ACCOUNT;')
-    #     if dbaccount:
-    #         return render_template('survey.html')
-    # else:
+    else:
+        db = sqlite3.connect('accounts.sqlite')
+        query = db.execute(
+            f'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
+        if dbaccount in query:
+            return render_template('survey.html')
+        else:
+            return render_template('index.html')
 
 
 '''
