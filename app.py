@@ -35,7 +35,7 @@ def create_page():
     return render_template('createaccount.html')
 
 
-@app.route('/createaccount', methods=["POST"])
+@app.route('/submitcreatepage', methods=["POST"])
 def create_account():
     username = request.form.get('username')
     password = request.form.get('password')
