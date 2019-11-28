@@ -45,12 +45,12 @@ def create_account():
         db = sqlite3.connect('accounts.sqlite')
         q = db.execute(f'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
         if not q.fetchone():
-
             os.mkdir(f'/home/tarekali/AnalyticSurveys/user_surveys/{username}')
 
             db.execute(
                 f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\');')
             db.commit()
+
             db.close()
             return render_template('index.html')
         else:
@@ -76,6 +76,6 @@ def parse_input_and_insert_it():
             f'/home/tarekali/AnalyticSurveys/user_surveys/{username}/{title}.html', 'w')
         f_to_write_to.write(template_to_write)
         f_to_write_to.close()
-        return f'you\'ve created a new template, {title}'
+        return f'you\'ve created a new survey, {title}'
     else:
         return "please fill out all forms"
