@@ -44,7 +44,6 @@ def create_account():
         return "please fill out all forms"
     elif username and password and confirm_pass and password == confirm_pass:
         db = sqlite3.connect('accounts.sqlite')
-<<<<<<< HEAD
         username_taken = db.execute(
             'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
         check = username_taken.fetchall()
@@ -56,13 +55,6 @@ def create_account():
             db.close()
         elif check:
             return 'account username has been taken, please choose a different one'
-=======
-        db.execute(
-            f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
-        db.commit()
-        return render_template('index.html')
-        # db.close()
->>>>>>> 620b53b435fb434bf8829a9eaa595914a1c25c92
     else:
         return 'please make sure that your confirmed password matches the one you put first!'
 
