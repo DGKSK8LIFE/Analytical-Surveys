@@ -63,8 +63,15 @@ def parse_input_and_insert_it():
     question_four = request.form.get('question_four')
     question_five = request.form.get('question_five')
     question_six = request.form.get('question_six')
+    username = request.form.get('username')
     if title and question_one and question_two and question_three and question_four and question_five and question_six:
         template_to_write = render_template('surveytemplate.html', title=title, question_one=question_one, question_two=question_two,
-                                                   question_three=question_three, question_four=question_four, question_five=question_five, question_six=question_six)
+                                            question_three=question_three, question_four=question_four, question_five=question_five, question_six=question_six)
+        f_to_write_to = open(
+            f'/home/tarekali/AnalyticSurveys/user_surveys/{username}', 'w')
+        f_to_write_to.write(template_to_write)
+        f_to_write_to.close()
+        return f'you\'ve created a new template, {title}'
+
     else:
         return "please fill out all forms"
