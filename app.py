@@ -45,7 +45,7 @@ def create_account():
     elif username and password and confirm_pass and password == confirm_pass:
         db = sqlite3.connect('accounts.sqlite')
         username_taken = db.execute(
-            'SELECT * FROM ACCOUNT WHERE username=\'{username}\;')
+            'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
         check = username_taken.fetchall()
         if not check:
             db.execute(
