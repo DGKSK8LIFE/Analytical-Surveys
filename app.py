@@ -68,7 +68,7 @@ def parse_input_and_insert_it():
         template_to_write = render_template('surveytemplate.html', title=title, question_one=question_one, question_two=question_two,
                                             question_three=question_three, question_four=question_four, question_five=question_five, question_six=question_six)
         f_to_write_to = open(
-            f'/home/tarekali/AnalyticSurveys/user_surveys/{username}', 'w')
+            f'/home/tarekali/AnalyticSurveys/user_surveys/{username}/{title}.html', 'w')
         f_to_write_to.write(template_to_write)
         f_to_write_to.close()
         return f'you\'ve created a new template, {title}'
