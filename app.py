@@ -47,13 +47,13 @@ def create_account():
         username_taken = db.execute(
             'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
         check = username_taken.fetchall()
-        if not check:
+        if check:
             db.execute(
                 f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
             db.commit()
             return render_template('index.html')
             db.close()
-        elif check:
+        elif not check:
             return 'account username has been taken, please choose a different one'
     else:
         return 'please make sure that your confirmed password matches the one you put first!'
