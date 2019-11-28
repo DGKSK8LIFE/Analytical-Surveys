@@ -49,7 +49,6 @@ def create_account():
         db.commit()
         db.close()
         return render_template('index.html')
-
     else:
         return 'please make sure that your confirmed password matches the one you put first!'
 
