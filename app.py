@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import sqlite3
+import os
 
 app = Flask(__name__)
 
@@ -28,9 +29,6 @@ def verify_login():
         # db.close()
 
 
-# def create_survey():
-#   @app.route('/survey', methods=['POST'])
-
 @app.route('/createaccount')
 def create_page():
     return render_template('createaccount.html')
@@ -44,6 +42,7 @@ def create_account():
     if not username or not password or not confirm_pass:
         return "please fill out all forms"
     elif username and password and confirm_pass and password == confirm_pass:
+        os.mkdir(f'/home/tarekali/AnalyticSurveys/user_surveys/{username}')
         db = sqlite3.connect('accounts.sqlite')
         db.execute(
             f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
@@ -55,13 +54,17 @@ def create_account():
         return 'please make sure that your confirmed password matches the one you put first!'
 
 
-# @app.route('/survey', methods=['POST'])
-# def parse_input_and_insert_it():
-#     title = request.form.get('title')
-#     question_one = request.form.get('question_one')
-#     question_two = request.form.get('question_two')
-#     question_three = request.form.get('question_three')
-#     question_four = request.form.get('question_four')
-#     question_five = request.form.get('question_five')
-#     question_six = request.form.get('question_six')
-#     if title and question_one and question_two and question_three and question_four and question_five and question_six:
+@app.route('/survey', methods=['POST'])
+def parse_input_and_insert_it():
+    title = request.form.get('title')
+    question_one = request.form.get('question_one')
+    question_two = request.form.get('question_two')
+    question_three = request.form.get('question_three')
+    question_four = request.form.get('question_four')
+    question_five = request.form.get('question_five')
+    question_six = request.form.get('question_six')
+    if title and question_one and question_two and question_three and question_four and question_five and question_six:
+        template_to_write = render_template('surveytemplate.html', title=title, question_one=question_one, question_two=question_two,
+                                                   question_three=question_three, question_four=question_four, question_five=question_five, question_six=question_six)
+    else:
+        return "please fill out all forms"
