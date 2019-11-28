@@ -21,8 +21,9 @@ def verify_login():
             f'SELECT * FROM ACCOUNT WHERE username=\'{username}\' AND password=\'{password}\';')
         account = query.fetchall()
         if account:
+            db.close()
             return render_template('survey.html')
-            # db.close()
+        db.close()
         return render_template('index.html')
         # db.close()
 
@@ -44,17 +45,12 @@ def create_account():
         return "please fill out all forms"
     elif username and password and confirm_pass and password == confirm_pass:
         db = sqlite3.connect('accounts.sqlite')
-        username_taken = db.execute(
-            'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
-        check = username_taken.fetchall()
-        if not check:
-            db.execute(
-                f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
-            db.commit()
-            return render_template('index.html')
-            db.close()
-        elif len(check) > 0:
-            return 'account username has been taken, please choose a different one'
+        db.execute(
+            f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
+        db.commit()
+        db.close()
+        return render_template('index.html')
+
     else:
         return 'please make sure that your confirmed password matches the one you put first!'
 
