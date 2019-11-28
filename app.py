@@ -62,3 +62,5 @@ def parse_input_and_insert_it():
     question_four = request.form.get('question_four')
     question_five = request.form.get('question_five')
     question_six = request.form.get('question_six')
+    if title and question_one and question_two and question_three and question_four and question_five and question_six:
+            
