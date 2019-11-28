@@ -43,11 +43,11 @@ def create_account():
     if not username or not password or not confirm_pass:
         return "please fill out all forms"
     elif username and password and confirm_pass and password == confirm_pass:
+        db = sqlite3.connect('accounts.sqlite')
         username_taken = db.execute(
             'SELECT * FROM ACCOUNT WHERE username=\'{username}\;')
         check = username_taken.fetchall()
         if not check:
-            db = sqlite3.connect('accounts.sqlite')
             db.execute(
                 f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
             db.commit()
@@ -59,13 +59,13 @@ def create_account():
         return 'please make sure that your confirmed password matches the one you put first!'
 
 
-# @app.route('/survey', methods=['POST'])
-# def parse_input_and_insert_it():
-#     title = request.form.get('title')
-#     question_one = request.form.get('question_one')
-#     question_two = request.form.get('question_two')
-#     question_three = request.form.get('question_three')
-#     question_four = request.form.get('question_four')
-#     question_five = request.form.get('question_five')
-#     question_six = request.form.get('question_six')
-#     if title and question_one and question_two and question_three and question_four and question_five and question_six:
+@app.route('/survey', methods=['POST'])
+def parse_input_and_insert_it():
+    title = request.form.get('title')
+    question_one = request.form.get('question_one')
+    question_two = request.form.get('question_two')
+    question_three = request.form.get('question_three')
+    question_four = request.form.get('question_four')
+    question_five = request.form.get('question_five')
+    question_six = request.form.get('question_six')
+    if title and question_one and question_two and question_three and question_four and question_five and question_six:
