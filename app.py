@@ -53,7 +53,7 @@ def create_account():
             db.commit()
             return render_template('index.html')
             db.close()
-        elif check:
+        elif len(check) > 0:
             return 'account username has been taken, please choose a different one'
     else:
         return 'please make sure that your confirmed password matches the one you put first!'
