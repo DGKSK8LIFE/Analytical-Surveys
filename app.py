@@ -42,13 +42,19 @@ def create_account():
     if not username or not password or not confirm_pass:
         return "please fill out all forms"
     elif username and password and confirm_pass and password == confirm_pass:
-        os.mkdir(f'/home/tarekali/AnalyticSurveys/user_surveys/{username}')
         db = sqlite3.connect('accounts.sqlite')
-        db.execute(
-            f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\') ')
-        db.commit()
-        db.close()
-        return render_template('index.html')
+        q = db.execute(f'SELECT * FROM ACCOUNT WHERE username=\'{username}\';')
+        if not q.fetchone():
+
+            os.mkdir(f'/home/tarekali/AnalyticSurveys/user_surveys/{username}')
+
+            db.execute(
+                f'INSERT INTO ACCOUNT VALUES (\'{username}\', \'{password}\');')
+            db.commit()
+            db.close()
+            return render_template('index.html')
+        else:
+            return 'That username is taken! Please choose a different one'
     else:
         return 'please make sure that your confirmed password matches the one you put first!'
 
