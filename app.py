@@ -76,7 +76,7 @@ def parse_input_and_insert_it():
             f'/home/tarekali/AnalyticSurveys/user_surveys/{username}/{title}.html', 'w')
         f_to_write_to.write(template_to_write)
         f_to_write_to.close()
-        return f'you\'ve created a new survey, {title}'
+        return f'you\'ve created a new survey, named: {title}'
     else:
         return "please fill out all forms"
 
