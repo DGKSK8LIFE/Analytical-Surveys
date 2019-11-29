@@ -79,3 +79,7 @@ def parse_input_and_insert_it():
         return f'you\'ve created a new survey, {title}'
     else:
         return "please fill out all forms"
+
+
+@app.route('/viewsurvey.html', methods=['POST'])
+
