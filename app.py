@@ -79,10 +79,3 @@ def parse_input_and_insert_it():
         return f'you\'ve created a new survey, named: {title}'
     else:
         return "please fill out all forms"
-
-
-@app.route('/viewsurvey.html', methods=['POST'])
-def show_survey():
-    survey_name = request.form.get('survey_name')
-    username = request.form.get('username')
-    return render_template(f'/user_surveys/{username}/{survey_name}.html')
